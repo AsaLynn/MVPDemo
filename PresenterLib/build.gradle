@@ -10,7 +10,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -81,7 +81,7 @@ install {
             project {
                 packaging 'aar'
                 //项目描述，随意填
-                name 'mvp 架构基类'
+                name 'mvp fro android...'
                 url siteUrl
                 licenses {
                     license {
@@ -120,7 +120,7 @@ bintray {
         //发布到JCenter上的项目名字
         name = libName
         //项目描述
-        desc = 'mvp 架构基类'
+        desc = 'mvp for android...'
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]
