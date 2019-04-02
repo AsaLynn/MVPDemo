@@ -11,7 +11,7 @@ import java.lang.ref.WeakReference;
  * Presenter基类，弱引用管理View生命周期
  * Created by zxn on 2019/3/28.
  */
-public abstract class BasePresenter<V> {
+public abstract class BasePresenter<V extends IView>{
 
     private String TAG = "BasePresenter";
     protected Reference<V> mRootView;
@@ -36,4 +36,38 @@ public abstract class BasePresenter<V> {
             mRootView = null;
         }
     }
+
+    protected void showLoading(String msg){
+        getView().showLoading(msg);
+    }
+
+    protected void showLoading(boolean cancelable){
+        getView().showLoading(cancelable);
+    }
+
+    protected void showLoading(String msg,boolean cancelable){
+        getView().showLoading(msg,cancelable);
+    }
+
+    protected void showLoading(int msgResId){
+        getView().showLoading(msgResId);
+    }
+
+    protected void showLoading(){
+        getView().showLoading();
+    }
+
+    protected void closeLoading() {
+        getView().closeLoading();
+    }
+
+    protected void showToast(int msg){
+        getView().showToast(msg);
+    }
+
+    protected void showToast(String msg){
+        getView().showToast(msg);
+    }
+
+
 }

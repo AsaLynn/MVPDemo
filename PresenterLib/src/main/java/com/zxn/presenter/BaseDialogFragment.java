@@ -31,10 +31,6 @@ public abstract class BaseDialogFragment<P extends BasePresenter> extends Dialog
 
     }
 
-    @Override
-    public void stopLoading() {
-
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

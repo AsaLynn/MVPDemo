@@ -136,9 +136,6 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     public void showLoading() {
     }
 
-    @Override
-    public void stopLoading() {
-    }
 
     public CharSequence getPageTitle() {
         return mPageTitle;

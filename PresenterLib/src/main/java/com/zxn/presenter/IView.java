@@ -5,7 +5,27 @@ package com.zxn.presenter;
  */
 public interface IView {
 
+    /**
+     * 弹出加载框
+     */
     void showLoading();
 
-    void stopLoading();
+    void showToast(int msg);
+
+    void showToast(String msg);
+
+    void showLoading(boolean cancelable);
+
+    void showLoading(String msg, boolean cancelable);
+
+    void showLoading(String msg);
+
+    void showLoading(int msgResId);
+
+    /**
+     * 关闭加载框
+     */
+    void closeLoading();
+
+
 }

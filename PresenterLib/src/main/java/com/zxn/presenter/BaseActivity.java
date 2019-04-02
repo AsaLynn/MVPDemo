@@ -46,10 +46,6 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         setTheme(android.R.style.Theme);
     }
 
-    @Override
-    public void stopLoading() {
-    }
-
     private P createPresenter() {
         CreatePresenter annotation = getClass().getAnnotation(CreatePresenter.class);
         Class<P> pClass = null;
