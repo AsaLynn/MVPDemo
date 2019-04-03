@@ -18,7 +18,7 @@ public abstract class ViewHolder<T> {
     private ViewGroup mRoot = null;
     protected Context mContext;
     protected View mView;
-    private T mData;
+    protected T mData;
 
     public ViewHolder(FragmentActivity activity) {
         mContext = activity;
