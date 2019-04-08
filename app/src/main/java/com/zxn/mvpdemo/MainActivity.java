@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.zxn.presenter.BaseActivity;
 import com.zxn.presenter.FragHolder;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends MvpActivity {
 
     @BindView(R.id.rv)
     RecyclerView rv;
@@ -31,10 +32,6 @@ public class MainActivity extends AppCompatActivity {
             data.add("this is item:" + i);
         }
         adapter.setNewData(data);
-
-//        FragHolder fragHolder = new FragHolder(this);
-//        adapter.addHeaderView(fragHolder.getView());
-//        fragHolder.attachFragment(MainFrag.newInstance());
 
         rv.setAdapter(adapter);
     }

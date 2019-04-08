@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 /**
+ * 继承此类后需要配置主题,主题继承BaseAppTheme
  * Created by zxn on 2019/3/28.
  */
 public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity implements IView {
