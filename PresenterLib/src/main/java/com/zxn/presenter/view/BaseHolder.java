@@ -1,4 +1,6 @@
-package com.zxn.presenter;
+package com.zxn.presenter.view;
+
+import com.zxn.presenter.presenter.IView;
 
 /**
  * Created by zxn on 2019/4/2.

@@ -1,4 +1,4 @@
-package com.zxn.presenter;
+package com.zxn.presenter.view;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -14,6 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+
+import com.zxn.presenter.presenter.BasePresenter;
+import com.zxn.presenter.presenter.CreatePresenter;
+import com.zxn.presenter.presenter.IView;
+import com.zxn.presenter.R;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 

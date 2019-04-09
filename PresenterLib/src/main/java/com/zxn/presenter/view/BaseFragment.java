@@ -1,4 +1,4 @@
-package com.zxn.presenter;
+package com.zxn.presenter.view;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,6 +8,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.zxn.presenter.presenter.BasePresenter;
+import com.zxn.presenter.presenter.CreatePresenter;
+import com.zxn.presenter.presenter.IView;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -58,6 +64,8 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         isPrepared = true;
+        if (usedEventBus())
+            regEventBus();
     }
 
     @Override
@@ -71,7 +79,9 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mUnbinder.unbind();
+        if (mUnbinder != null)
+            mUnbinder.unbind();
+        unRegEventBus();
     }
 
     @Override
@@ -134,10 +144,32 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
 
     @Override
     public void showLoading() {
+
     }
 
 
     public CharSequence getPageTitle() {
         return mPageTitle;
     }
+
+    /**
+     * 是否使用EventBus，如果需要使用子类重载此方法并返回true
+     *
+     * @return
+     */
+    protected boolean usedEventBus() {
+        return false;
+    }
+
+    protected void regEventBus() {
+        if (!EventBus.getDefault().isRegistered(this))
+            EventBus.getDefault().register(this);
+    }
+
+    protected void unRegEventBus() {
+        if (EventBus.getDefault().isRegistered(this))
+            EventBus.getDefault().unregister(this);
+    }
+
+
 }

@@ -1,12 +1,8 @@
 package com.zxn.mvpdemo;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
-import com.zxn.presenter.BaseActivity;
-import com.zxn.presenter.FragHolder;
 
 import java.util.ArrayList;
 
@@ -21,8 +17,8 @@ public class MainActivity extends MvpActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        //setContentView(R.layout.activity_main);
+        //ButterKnife.bind(this);
 
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setHasFixedSize(true);
@@ -34,5 +30,10 @@ public class MainActivity extends MvpActivity {
         adapter.setNewData(data);
 
         rv.setAdapter(adapter);
+    }
+
+    @Override
+    protected int getLayoutResId() {
+        return R.layout.activity_main;
     }
 }

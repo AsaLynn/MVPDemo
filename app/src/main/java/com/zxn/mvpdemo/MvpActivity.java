@@ -1,6 +1,6 @@
 package com.zxn.mvpdemo;
 
-import com.zxn.presenter.BaseActivity;
+import com.zxn.presenter.view.BaseActivity;
 
 /**
  * Created by zxn on 2019/4/8.

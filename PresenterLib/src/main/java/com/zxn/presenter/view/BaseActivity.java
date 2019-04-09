@@ -1,12 +1,22 @@
-package com.zxn.presenter;
+package com.zxn.presenter.view;
 
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+
+import com.zxn.presenter.presenter.BasePresenter;
+import com.zxn.presenter.presenter.CreatePresenter;
+import com.zxn.presenter.presenter.IView;
+
+import org.greenrobot.eventbus.EventBus;
+
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * 继承此类后需要配置主题,主题继承BaseAppTheme
@@ -17,6 +27,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     private static final String TAG = "BaseActivity";
     public P mPresenter;
     protected Context mContext;
+    private Unbinder mUnbinder;
 
     /***是否显示标题栏*/
 
@@ -24,12 +35,17 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
+        if (getLayoutResId() != 0) {
+            setContentView(getLayoutResId());
+            mUnbinder = ButterKnife.bind(this);
+        }
+        mContext = this;
         if (createPresenter() != null) {
             mPresenter = createPresenter();
             mPresenter.attachView(this);
         }
-        mContext = this;
+        if (usedEventBus())
+            regEventBus();
     }
 
 
@@ -39,6 +55,10 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         if (mPresenter != null) {
             mPresenter.detachView();
         }
+        if (mUnbinder != null) {
+            mUnbinder.unbind();
+        }
+        unRegEventBus();
     }
 
 
@@ -65,4 +85,25 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
     }
+
+    /**
+     * 是否使用EventBus，如果需要使用子类重载此方法并返回true
+     *
+     * @return
+     */
+    protected boolean usedEventBus() {
+        return false;
+    }
+
+    protected void regEventBus() {
+        if (!EventBus.getDefault().isRegistered(this))
+            EventBus.getDefault().register(this);
+    }
+
+    protected void unRegEventBus() {
+        if (EventBus.getDefault().isRegistered(this))
+            EventBus.getDefault().unregister(this);
+    }
+
+    protected abstract @LayoutRes int getLayoutResId();
 }
