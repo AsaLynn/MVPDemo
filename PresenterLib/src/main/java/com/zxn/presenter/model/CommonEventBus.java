@@ -17,5 +17,12 @@ public class CommonEventBus {
         EventBus.getDefault().post(event);
     }
 
+    /**
+     * Posts the given event to the event bus and holds on to the event (because it is sticky). The most recent sticky
+     * event of an event's type is kept in memory for future access by subscribers using Subscribe#sticky.
+     */
+    public void postSticky(CommonEvent event) {
+        EventBus.getDefault().postSticky(event);
+    }
 
 }
