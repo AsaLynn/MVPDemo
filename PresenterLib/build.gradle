@@ -9,8 +9,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 10
-        versionName "1.1.0"
+        versionCode 111
+        versionName "1.1.1"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -31,7 +31,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation 'com.zcommon.lib:zcommonutils:1.1.9'
+    implementation 'com.zcommon.lib:zcommonutils:1.2.1'
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     compile 'org.greenrobot:eventbus:3.1.1'
@@ -46,7 +46,7 @@ def libName = "PresenterLib"
 //发布到组织名称名字，必须填写
 group = "com.zxn.presenter"
 // 版本号，下次更新是只需要更改版本号即可
-version = "1.1.0"
+version = "1.1.1"
 //上面配置后上传至JCenter后的编译路径是这样的： compile 'com.zxn.presenter.PresenterLib:1.0.0'
 //生成源文件
 task sourcesJar(type: Jar) {

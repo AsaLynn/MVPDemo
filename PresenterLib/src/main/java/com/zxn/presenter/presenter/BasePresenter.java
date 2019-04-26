@@ -11,7 +11,7 @@ import java.lang.ref.WeakReference;
  * Presenter基类，弱引用管理View生命周期
  * Created by zxn on 2019/3/28.
  */
-public abstract class BasePresenter<V extends IView>{
+public abstract class BasePresenter<V extends IView> {
 
     private String TAG = "BasePresenter";
     protected Reference<V> mRootView;
@@ -37,36 +37,52 @@ public abstract class BasePresenter<V extends IView>{
         }
     }
 
-    protected void showLoading(String msg){
-        getView().showLoading(msg);
+    protected void showLoading(String msg) {
+        if (isViewAttached()) {
+            getView().showLoading(msg);
+        }
     }
 
-    protected void showLoading(boolean cancelable){
-        getView().showLoading(cancelable);
+    protected void showLoading(boolean cancelable) {
+        if (isViewAttached()) {
+            getView().showLoading(cancelable);
+        }
     }
 
-    protected void showLoading(String msg,boolean cancelable){
-        getView().showLoading(msg,cancelable);
+    protected void showLoading(String msg, boolean cancelable) {
+        if (isViewAttached()) {
+            getView().showLoading(msg, cancelable);
+        }
     }
 
-    protected void showLoading(int msgResId){
-        getView().showLoading(msgResId);
+    protected void showLoading(int msgResId) {
+        if (isViewAttached()) {
+            getView().showLoading(msgResId);
+        }
     }
 
-    protected void showLoading(){
-        getView().showLoading();
+    protected void showLoading() {
+        if (isViewAttached()) {
+            getView().showLoading();
+        }
     }
 
     protected void closeLoading() {
-        getView().closeLoading();
+        if (isViewAttached()) {
+            getView().closeLoading();
+        }
     }
 
-    protected void showToast(int msg){
-        getView().showToast(msg);
+    protected void showToast(int msg) {
+        if (isViewAttached()) {
+            getView().showToast(msg);
+        }
     }
 
-    protected void showToast(String msg){
-        getView().showToast(msg);
+    protected void showToast(String msg) {
+        if (isViewAttached()) {
+            getView().showToast(msg);
+        }
     }
 
 
