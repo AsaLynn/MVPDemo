@@ -155,7 +155,7 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     /**
      * 是否使用EventBus，如果需要使用子类重载此方法并返回true
      *
-     * @return
+     * @return  使用启用
      */
     protected boolean usedEventBus() {
         return false;

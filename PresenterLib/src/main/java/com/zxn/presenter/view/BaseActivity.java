@@ -89,7 +89,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     /**
      * 是否使用EventBus，如果需要使用子类重载此方法并返回true
      *
-     * @return
+     * @return 是否启用
      */
     protected boolean usedEventBus() {
         return false;
