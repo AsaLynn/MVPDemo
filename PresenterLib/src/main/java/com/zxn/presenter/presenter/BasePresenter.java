@@ -1,8 +1,7 @@
 package com.zxn.presenter.presenter;
 
+import android.support.v4.util.Preconditions;
 import android.util.Log;
-
-import com.zcommon.lib.Preconditions;
 
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
@@ -25,7 +24,10 @@ public abstract class BasePresenter<V extends IView> {
     }
 
     public void attachView(V view) {
-        Preconditions.checkNotNull(view, "%s cannot be null", IView.class.getName());
+
+        if (view == null) {
+            throw new NullPointerException("view cannot be null");
+        }
         mRootView = new WeakReference<V>(view);
         Log.i(TAG, "BasePresenter" + mRootView.get());
     }

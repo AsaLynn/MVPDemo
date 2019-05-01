@@ -10,16 +10,19 @@ import android.text.TextUtils;
  */
 public class BaseApp extends Application {
 
+    protected static Context mContext;
+
     @Override
     public void onCreate() {
         super.onCreate();
+
+        mContext = this;
 
         initDevelopMode();
 
         initLogConfig();
 
         initDbConfig();
-
 
     }
 
@@ -51,8 +54,9 @@ public class BaseApp extends Application {
         return TextUtils.equals(BuildConfig.BUILD_TYPE, "debug");
     }
 
-    public static <T extends BaseApp> T getApplication(Context context) {
-        return (T) context.getApplicationContext();
+    public static <T extends BaseApp> T getApplication() {
+        return (T) mContext;
     }
+
 
 }
