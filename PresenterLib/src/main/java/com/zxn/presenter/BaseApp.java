@@ -46,6 +46,16 @@ public class BaseApp extends Application {
     }
 
     /**
+     * 是否开启输出日志.
+     *
+     * @return
+     */
+    public boolean isShowLog() {
+        return isDebug();
+//        return true;
+    }
+
+    /**
      * 开发模式
      *
      * @return false:线上模式,true:调试模式
