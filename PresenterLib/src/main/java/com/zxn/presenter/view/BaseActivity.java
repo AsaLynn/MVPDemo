@@ -34,7 +34,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(isPortraitOrientation() ? ActivityInfo.SCREEN_ORIENTATION_PORTRAIT : ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         if (getLayoutResId() != 0) {
             setContentView(getLayoutResId());
             mUnbinder = ButterKnife.bind(this);
@@ -46,6 +46,15 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         }
         if (usedEventBus())
             regEventBus();
+    }
+
+    /**
+     * 屏幕方向
+     *
+     * @return :true:竖屏,false:横向
+     */
+    public boolean isPortraitOrientation() {
+        return true;
     }
 
 
@@ -105,5 +114,6 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
             EventBus.getDefault().unregister(this);
     }
 
-    protected abstract @LayoutRes int getLayoutResId();
+    protected abstract @LayoutRes
+    int getLayoutResId();
 }
