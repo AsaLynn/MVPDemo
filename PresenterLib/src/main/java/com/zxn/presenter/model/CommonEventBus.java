@@ -13,7 +13,7 @@ public class CommonEventBus {
      *
      * @param subscriber 订阅者.
      */
-    public void register(Object subscriber) {
+    public static void register(Object subscriber) {
         EventBus.getDefault().register(subscriber);
     }
 
@@ -22,7 +22,7 @@ public class CommonEventBus {
      *
      * @param subscriber 订阅者.
      */
-    public void unregister(Object subscriber) {
+    public static void unregister(Object subscriber) {
         EventBus.getDefault().unregister(subscriber);
     }
 
