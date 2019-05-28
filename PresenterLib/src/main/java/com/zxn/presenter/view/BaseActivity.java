@@ -9,6 +9,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.gyf.immersionbar.ImmersionBar;
+import com.zxn.presenter.R;
 import com.zxn.presenter.presenter.BasePresenter;
 import com.zxn.presenter.presenter.CreatePresenter;
 import com.zxn.presenter.presenter.IView;
@@ -40,6 +42,9 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
             mUnbinder = ButterKnife.bind(this);
         }
         mContext = this;
+
+        initImmersionBar();
+
         if (createPresenter() != null) {
             mPresenter = createPresenter();
             mPresenter.attachView(this);
@@ -116,4 +121,14 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
 
     protected abstract @LayoutRes
     int getLayoutResId();
+
+    /**
+     * 初始化沉浸式
+     * Init immersion bar.
+     */
+    protected void initImmersionBar() {
+        //设置共同沉浸式样式
+        //navigationBarColor(R.color.colorPrimary)
+        ImmersionBar.with(this).init();
+    }
 }
