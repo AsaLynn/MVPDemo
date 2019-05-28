@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.gyf.immersionbar.components.SimpleImmersionFragment;
 import com.zxn.presenter.presenter.BasePresenter;
 import com.zxn.presenter.presenter.CreatePresenter;
 import com.zxn.presenter.presenter.IView;
@@ -21,7 +22,7 @@ import butterknife.Unbinder;
 /**
  * Created by zxn on 2019/3/28.
  */
-public abstract class BaseFragment<P extends BasePresenter> extends Fragment implements IView {
+public abstract class BaseFragment<P extends BasePresenter> extends SimpleImmersionFragment implements IView {
 
     private String TAG = "BaseFragment";
 
@@ -58,6 +59,12 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
             }
         }
         return mRootView;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
     }
 
     @Override
@@ -142,10 +149,7 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
         }
     }
 
-    @Override
-    public void showLoading() {
 
-    }
 
 
     public CharSequence getPageTitle() {
@@ -155,7 +159,7 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     /**
      * 是否使用EventBus，如果需要使用子类重载此方法并返回true
      *
-     * @return  使用启用
+     * @return 使用启用
      */
     protected boolean usedEventBus() {
         return false;
@@ -171,5 +175,59 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
             EventBus.getDefault().unregister(this);
     }
 
+    @Override
+    public void showLoading() {
+        if (getActivity() instanceof BaseActivity) {
+            BaseActivity activity = (BaseActivity) getActivity();
+            activity.showLoading();
+        }
+    }
 
+    @Override
+    public void showLoading(String msg) {
+        if (getActivity() instanceof BaseActivity) {
+            BaseActivity activity = (BaseActivity) getActivity();
+            activity.showLoading(msg);
+        }
+    }
+
+    @Override
+    public void showLoading(int msgResId) {
+        if (getActivity() instanceof BaseActivity) {
+            BaseActivity activity = (BaseActivity) getActivity();
+            activity.showLoading(msgResId);
+        }
+    }
+
+    @Override
+    public void showLoading(boolean cancelable) {
+        if (getActivity() instanceof BaseActivity) {
+            BaseActivity activity = (BaseActivity) getActivity();
+            activity.showLoading(cancelable);
+        }
+    }
+
+    @Override
+    public void showLoading(String msg, boolean cancelable) {
+        if (getActivity() instanceof BaseActivity) {
+            BaseActivity activity = (BaseActivity) getActivity();
+            activity.showLoading(msg,cancelable);
+        }
+    }
+
+    @Override
+    public void showToast(int msg) {
+        if (getActivity() instanceof BaseActivity) {
+            BaseActivity activity = (BaseActivity) getActivity();
+            activity.showToast(msg);
+        }
+    }
+
+    @Override
+    public void showToast(String msg) {
+        if (getActivity() instanceof BaseActivity) {
+            BaseActivity activity = (BaseActivity) getActivity();
+            activity.showToast(msg);
+        }
+    }
 }

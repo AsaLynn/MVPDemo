@@ -32,11 +32,6 @@ public abstract class BaseDialogFragment<P extends BasePresenter> extends Dialog
     private Unbinder mUnbinder;
     protected String TAG = this.getClass().getSimpleName();
 
-    @Override
-    public void showLoading() {
-
-    }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -118,5 +113,61 @@ public abstract class BaseDialogFragment<P extends BasePresenter> extends Dialog
 
     public int show(FragmentTransaction transaction) {
         return super.show(transaction, TAG);
+    }
+
+    @Override
+    public void showLoading() {
+        if (getActivity() instanceof BaseActivity) {
+            BaseActivity activity = (BaseActivity) getActivity();
+            activity.showLoading();
+        }
+    }
+
+    @Override
+    public void showLoading(String msg) {
+        if (getActivity() instanceof BaseActivity) {
+            BaseActivity activity = (BaseActivity) getActivity();
+            activity.showLoading(msg);
+        }
+    }
+
+    @Override
+    public void showLoading(int msgResId) {
+        if (getActivity() instanceof BaseActivity) {
+            BaseActivity activity = (BaseActivity) getActivity();
+            activity.showLoading(msgResId);
+        }
+    }
+
+    @Override
+    public void showLoading(boolean cancelable) {
+        if (getActivity() instanceof BaseActivity) {
+            BaseActivity activity = (BaseActivity) getActivity();
+            activity.showLoading(cancelable);
+        }
+    }
+
+    @Override
+    public void showLoading(String msg, boolean cancelable) {
+        if (getActivity() instanceof BaseActivity) {
+            BaseActivity activity = (BaseActivity) getActivity();
+            activity.showLoading(msg,cancelable);
+        }
+    }
+
+    @Override
+    public void showToast(int msg) {
+        if (getActivity() instanceof BaseActivity) {
+            BaseActivity activity = (BaseActivity) getActivity();
+            activity.showToast(msg);
+        }
+    }
+
+    @Override
+    public void showToast(String msg) {
+        if (getActivity() instanceof BaseActivity) {
+            BaseActivity activity = (BaseActivity) getActivity();
+            activity.showToast(msg);
+        }
     }
 }
