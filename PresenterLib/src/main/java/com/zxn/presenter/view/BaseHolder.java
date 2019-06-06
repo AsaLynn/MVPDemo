@@ -5,7 +5,7 @@ import com.zxn.presenter.presenter.IView;
 /**
  * Created by zxn on 2019/4/2.
  */
-public abstract class BaseHolder<T> extends ViewHolder implements IView {
+public abstract class BaseHolder<T> extends ViewHolder<T> implements IView {
 
     protected BaseActivity mBaseActivity;
     protected BaseFragment mBaseFragment;
