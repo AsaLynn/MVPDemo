@@ -50,13 +50,14 @@ public abstract class BaseDialogFragment<P extends BasePresenter> extends Dialog
             mRootView = getLayoutResId() <= 0
                     ? super.onCreateView(inflater, container, savedInstanceState)
                     : inflater.inflate(getLayoutResId(), container, false);
-            mUnbinder = ButterKnife.bind(this, mRootView);
+
         } else {
             ViewGroup parent = (ViewGroup) mRootView.getParent();
             if (parent != null) {
                 parent.removeView(mRootView);
             }
         }
+        mUnbinder = ButterKnife.bind(this, mRootView);
         return mRootView;
     }
 

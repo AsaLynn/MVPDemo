@@ -22,7 +22,7 @@ import butterknife.Unbinder;
 /**
  * Created by zxn on 2019/3/28.
  */
-public abstract class BaseFragment<P extends BasePresenter> extends SimpleImmersionFragment implements IView {
+public abstract class BaseFragment<P extends BasePresenter> extends Fragment /*SimpleImmersionFragment*/ implements IView {
 
     private String TAG = "BaseFragment";
 
@@ -51,13 +51,13 @@ public abstract class BaseFragment<P extends BasePresenter> extends SimpleImmers
             mRootView = getLayoutResId() <= 0
                     ? super.onCreateView(inflater, container, savedInstanceState)
                     : inflater.inflate(getLayoutResId(), container, false);
-            mUnbinder = ButterKnife.bind(this, mRootView);
         } else {
             ViewGroup parent = (ViewGroup) mRootView.getParent();
             if (parent != null) {
                 parent.removeView(mRootView);
             }
         }
+        mUnbinder = ButterKnife.bind(this, mRootView);
         return mRootView;
     }
 

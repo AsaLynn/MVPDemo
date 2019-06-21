@@ -1,7 +1,6 @@
 package com.zxn.presenter.view;
 
 import android.content.Context;
-import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -9,8 +8,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.gyf.immersionbar.ImmersionBar;
-import com.zxn.presenter.R;
 import com.zxn.presenter.presenter.BasePresenter;
 import com.zxn.presenter.presenter.CreatePresenter;
 import com.zxn.presenter.presenter.IView;
@@ -36,7 +33,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRequestedOrientation(isPortraitOrientation() ? ActivityInfo.SCREEN_ORIENTATION_PORTRAIT : ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+//        setRequestedOrientation(isPortraitOrientation() ? ActivityInfo.SCREEN_ORIENTATION_PORTRAIT : ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         if (getLayoutResId() != 0) {
             setContentView(getLayoutResId());
             mUnbinder = ButterKnife.bind(this);
@@ -76,10 +73,10 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     }
 
 
-    @Override
-    public void showLoading() {
-        setTheme(android.R.style.Theme);
-    }
+//    @Override
+//    public void showLoading() {
+//        setTheme(android.R.style.Theme);
+//    }
 
     private P createPresenter() {
         CreatePresenter annotation = getClass().getAnnotation(CreatePresenter.class);
@@ -129,6 +126,6 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     protected void initImmersionBar() {
         //设置共同沉浸式样式
         //navigationBarColor(R.color.colorPrimary)
-        ImmersionBar.with(this).init();
+//        ImmersionBar.with(this).init();
     }
 }
