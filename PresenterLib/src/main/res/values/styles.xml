@@ -48,6 +48,7 @@
         <item name="android:windowIsFloating">false</item>
     </style>
 
+    <!--底部可以输入编辑的弹框样式.-->
     <style name="BottomEditBaseDialogFragment" parent="@style/BaseAppTheme">
         <item name="android:windowNoTitle">true</item>
         <item name="android:layout_width">match_parent</item>
