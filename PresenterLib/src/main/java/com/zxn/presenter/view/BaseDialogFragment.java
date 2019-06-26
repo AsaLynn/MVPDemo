@@ -28,7 +28,7 @@ import butterknife.Unbinder;
  */
 public abstract class BaseDialogFragment<P extends BasePresenter> extends DialogFragment implements IView {
     protected P mPresenter;
-    private View mRootView;
+    protected View mRootView;
     private Unbinder mUnbinder;
     protected String TAG = this.getClass().getSimpleName();
 
@@ -89,7 +89,6 @@ public abstract class BaseDialogFragment<P extends BasePresenter> extends Dialog
         try {
             return pClass.newInstance();
         } catch (Exception e) {
-            //Logger.e("Presenter创建失败!，检查是否声明了@CreatePresenter(xx.class)注解");
             Log.i(TAG, "Presenter创建失败!，检查是否声明了@CreatePresenter(xx.class)注解");
             return null;
         }
