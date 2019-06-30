@@ -1,10 +1,10 @@
 package com.zxn.presenter.presenter;
 
-import android.support.v4.util.Preconditions;
 import android.util.Log;
 
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
+import java.util.List;
 
 /**
  * Presenter基类，弱引用管理View生命周期
@@ -14,6 +14,9 @@ public abstract class BasePresenter<V extends IView> {
 
     private String TAG = "BasePresenter";
     protected Reference<V> mRootView;
+
+    protected int mCurrentPage = 1;//当前页(部分接口字段名称可能不同)
+    protected int mPageCount = 1;//总页数(部分接口字段名称可能不同)
 
     protected V getView() {
         return mRootView.get();
@@ -87,5 +90,23 @@ public abstract class BasePresenter<V extends IView> {
         }
     }
 
+
+    /**
+     * 是否为列表下拉刷新,子类可重写
+     *
+     * @return
+     */
+    public boolean isRefresh() {
+        return mCurrentPage == 1;
+    }
+
+    /**
+     * 是否有跟多页,子类可重写
+     *
+     * @return 还可以继续加载的时候返回true.
+     */
+    public boolean hasMore() {
+        return mCurrentPage < mPageCount;
+    }
 
 }
