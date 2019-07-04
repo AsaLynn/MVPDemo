@@ -55,7 +55,13 @@ public abstract class ViewHolder<T> {
         return mView;
     }
 
+    @Deprecated
     public void setData(T data) {
         mData = data;
+    }
+
+    public ViewHolder setHolderData(T data) {
+        mData = data;
+        return this;
     }
 }

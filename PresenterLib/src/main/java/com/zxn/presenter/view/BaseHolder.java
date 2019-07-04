@@ -59,4 +59,6 @@ public abstract class BaseHolder<T> extends ViewHolder<T> implements IView {
     public void closeLoading() {
         mBaseActivity.closeLoading();
     }
+
+
 }
