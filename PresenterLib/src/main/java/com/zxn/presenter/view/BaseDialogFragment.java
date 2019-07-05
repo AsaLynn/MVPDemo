@@ -151,7 +151,7 @@ public abstract class BaseDialogFragment<P extends BasePresenter> extends Dialog
     public void showLoading(String msg, boolean cancelable) {
         if (getActivity() instanceof BaseActivity) {
             BaseActivity activity = (BaseActivity) getActivity();
-            activity.showLoading(msg,cancelable);
+            activity.showLoading(msg, cancelable);
         }
     }
 
@@ -180,6 +180,6 @@ public abstract class BaseDialogFragment<P extends BasePresenter> extends Dialog
     }
 
     public interface OnDialogClickListener {
-        void onConfirmClick();
+        void onConfirmClick(View view);
     }
 }
