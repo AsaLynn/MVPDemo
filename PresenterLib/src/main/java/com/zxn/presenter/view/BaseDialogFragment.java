@@ -179,8 +179,7 @@ public abstract class BaseDialogFragment<P extends BasePresenter> extends Dialog
         }
     }
 
-    public interface OnDialogConfirmListener {
-
-        void onConfrim();
+    public interface OnDialogClickListener {
+        void onConfirmClick();
     }
 }
