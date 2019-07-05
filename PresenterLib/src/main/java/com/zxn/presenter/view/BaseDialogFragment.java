@@ -170,4 +170,17 @@ public abstract class BaseDialogFragment<P extends BasePresenter> extends Dialog
             activity.showToast(msg);
         }
     }
+
+    @Override
+    public void closeLoading() {
+        if (getActivity() instanceof BaseActivity) {
+            BaseActivity activity = (BaseActivity) getActivity();
+            activity.closeLoading();
+        }
+    }
+
+    public interface OnDialogConfirmListener {
+
+        void onConfrim();
+    }
 }
