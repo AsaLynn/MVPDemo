@@ -45,11 +45,6 @@ public class BaseApp extends Application {
     protected void initLogConfig() {
     }
 
-    /**
-     * 是否开启输出日志.
-     *
-     * @return
-     */
     public boolean isShowLog() {
         return isDebug();
 //        return true;
