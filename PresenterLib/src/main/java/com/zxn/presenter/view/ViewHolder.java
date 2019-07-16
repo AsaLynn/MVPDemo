@@ -41,12 +41,15 @@ public abstract class ViewHolder<T> {
         onInitView(mView);
     }
 
-    protected abstract void onInitView(View rootView);
+    protected void onInitView(View rootView) {
 
-    public void setVisibility(boolean visibility) {
-        if (null == mView)
-            return;
-        mView.setVisibility(visibility ? View.VISIBLE : View.GONE);
+    }
+
+    public ViewHolder setVisibility(boolean visibility) {
+        if (null != mView) {
+            mView.setVisibility(visibility ? View.VISIBLE : View.GONE);
+        }
+        return this;
     }
 
     protected abstract int getLayoutResId();
