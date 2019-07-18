@@ -150,8 +150,6 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment /*S
     }
 
 
-
-
     public CharSequence getPageTitle() {
         return mPageTitle;
     }
@@ -211,7 +209,7 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment /*S
     public void showLoading(String msg, boolean cancelable) {
         if (getActivity() instanceof BaseActivity) {
             BaseActivity activity = (BaseActivity) getActivity();
-            activity.showLoading(msg,cancelable);
+            activity.showLoading(msg, cancelable);
         }
     }
 
@@ -228,6 +226,17 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment /*S
         if (getActivity() instanceof BaseActivity) {
             BaseActivity activity = (BaseActivity) getActivity();
             activity.showToast(msg);
+        }
+    }
+
+    /**
+     * Call this when your activity is done and should be closed.  The
+     * ActivityResult is propagated back to whoever launched you via
+     * onActivityResult().
+     */
+    public void finish() {
+        if (null != getActivity()) {
+            getActivity().finish();
         }
     }
 }
