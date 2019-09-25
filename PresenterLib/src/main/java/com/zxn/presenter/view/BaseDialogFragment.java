@@ -40,7 +40,15 @@ public abstract class BaseDialogFragment<P extends BasePresenter> extends Dialog
             mPresenter = createPresenter();
             mPresenter.attachView(this);
         }
-        setStyle(DialogFragment.STYLE_NO_TITLE, R.style.Dialog_FullScreen);
+        setStyle(DialogFragment.STYLE_NO_TITLE, initTheme());
+    }
+
+    /**
+     * 重写此方法可以更换主题
+     * @return
+     */
+    protected int initTheme() {
+        return R.style.Dialog_FullScreen;
     }
 
     @Nullable
@@ -97,10 +105,10 @@ public abstract class BaseDialogFragment<P extends BasePresenter> extends Dialog
     protected abstract int getLayoutResId();
 
     protected void onDialogCreated(WindowManager.LayoutParams params, Dialog dialog) {
-        dialog.setCancelable(true);
+        /*dialog.setCancelable(true);
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
         params.gravity = Gravity.BOTTOM;
-        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        params.height = WindowManager.LayoutParams.WRAP_CONTENT;*/
     }
 
     public void show(FragmentManager manager) {
