@@ -4,11 +4,13 @@ import android.app.Application;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.zxn.presenter.presenter.IView;
+
 /**
  * 应用需要继承此类.
  * Created by zxn on 2019/4/30.
  */
-public class BaseApp extends Application {
+public class BaseApp extends Application implements IView {
 
     protected static Context mContext;
 
@@ -64,4 +66,43 @@ public class BaseApp extends Application {
     }
 
 
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void showToast(int msg) {
+
+    }
+
+    @Override
+    public void showToast(String msg) {
+
+    }
+
+    @Override
+    public void showLoading(boolean cancelable) {
+
+    }
+
+    @Override
+    public void showLoading(String msg, boolean cancelable) {
+
+    }
+
+    @Override
+    public void showLoading(String msg) {
+
+    }
+
+    @Override
+    public void showLoading(int msgResId) {
+
+    }
+
+    @Override
+    public void closeLoading() {
+
+    }
 }

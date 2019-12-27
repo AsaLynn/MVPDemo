@@ -10,11 +10,11 @@ import java.util.List;
  */
 public class MyPresenter extends MainPresenter<MyPresenter.IMyPresenterView>{
 
-    public void init() {
-        mData = new ArrayList<>();
-        mData.add("123");
-        mData.add(123);
-    }
+//    public void init() {
+//        mData = new ArrayList<>();
+//        mData.add("123");
+//        mData.add(123);
+//    }
 
     public interface IMyPresenterView extends IView {
         void on();

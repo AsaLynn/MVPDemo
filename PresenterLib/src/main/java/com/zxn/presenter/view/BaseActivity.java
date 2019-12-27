@@ -3,11 +3,13 @@ package com.zxn.presenter.view;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import androidx.annotation.LayoutRes;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.zxn.presenter.BaseApp;
 import com.zxn.presenter.presenter.BasePresenter;
 import com.zxn.presenter.presenter.CreatePresenter;
 import com.zxn.presenter.presenter.IView;
@@ -127,5 +129,69 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         //设置共同沉浸式样式
         //navigationBarColor(R.color.colorPrimary)
 //        ImmersionBar.with(this).init();
+    }
+
+    @Override
+    public void showLoading() {
+        if (getApplication() instanceof BaseApp) {
+            BaseApp baseApp = (BaseApp) getApplication();
+            baseApp.showLoading();
+        }
+    }
+
+    @Override
+    public void showToast(int msg) {
+        if (getApplication() instanceof BaseApp) {
+            BaseApp baseApp = (BaseApp) getApplication();
+            baseApp.showToast(msg);
+        }
+    }
+
+    @Override
+    public void showToast(String msg) {
+        if (getApplication() instanceof BaseApp) {
+            BaseApp baseApp = (BaseApp) getApplication();
+            baseApp.showToast(msg);
+        }
+    }
+
+    @Override
+    public void showLoading(boolean cancelable) {
+        if (getApplication() instanceof BaseApp) {
+            BaseApp baseApp = (BaseApp) getApplication();
+            baseApp.showLoading(cancelable);
+        }
+    }
+
+    @Override
+    public void showLoading(String msg, boolean cancelable) {
+        if (getApplication() instanceof BaseApp) {
+            BaseApp baseApp = (BaseApp) getApplication();
+            baseApp.showLoading(msg,cancelable);
+        }
+    }
+
+    @Override
+    public void showLoading(String msg) {
+        if (getApplication() instanceof BaseApp) {
+            BaseApp baseApp = (BaseApp) getApplication();
+            baseApp.showLoading(msg);
+        }
+    }
+
+    @Override
+    public void showLoading(int msgResId) {
+        if (getApplication() instanceof BaseApp) {
+            BaseApp baseApp = (BaseApp) getApplication();
+            baseApp.showLoading(msgResId);
+        }
+    }
+
+    @Override
+    public void closeLoading() {
+        if (getApplication() instanceof BaseApp) {
+            BaseApp baseApp = (BaseApp) getApplication();
+            baseApp.closeLoading();
+        }
     }
 }
