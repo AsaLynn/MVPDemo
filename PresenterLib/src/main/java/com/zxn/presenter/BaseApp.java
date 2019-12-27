@@ -5,6 +5,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.zxn.presenter.presenter.IView;
+import com.zxn.utils.UIUtils;
 
 /**
  * 应用需要继承此类.
@@ -26,6 +27,7 @@ public class BaseApp extends Application implements IView {
 
         initDbConfig();
 
+        UIUtils.init(this);
     }
 
     /**
@@ -73,12 +75,12 @@ public class BaseApp extends Application implements IView {
 
     @Override
     public void showToast(int msg) {
-
+        UIUtils.toast(UIUtils.getString(msg));
     }
 
     @Override
     public void showToast(String msg) {
-
+        UIUtils.toast(msg);
     }
 
     @Override
