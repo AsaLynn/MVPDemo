@@ -21,13 +21,14 @@ public class BaseApp extends Application implements IView {
 
         mContext = this;
 
+        UIUtils.init(this);
+
         initDevelopMode();
 
         initLogConfig();
 
         initDbConfig();
 
-        UIUtils.init(this);
     }
 
     /**
