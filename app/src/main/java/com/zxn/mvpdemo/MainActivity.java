@@ -17,9 +17,6 @@ public class MainActivity extends MvpActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
-        //ButterKnife.bind(this);
-
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setHasFixedSize(true);
         MainAdapter adapter = new MainAdapter();
@@ -28,7 +25,6 @@ public class MainActivity extends MvpActivity {
             data.add("this is item:" + i);
         }
         adapter.setNewData(data);
-
         rv.setAdapter(adapter);
     }
 
