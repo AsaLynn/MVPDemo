@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -30,6 +31,7 @@ public abstract class BaseDialogFragment<P extends BasePresenter> extends Dialog
     protected P mPresenter;
     protected View mRootView;
     private Unbinder mUnbinder;
+    protected FragmentActivity mContext;
     protected String TAG = this.getClass().getSimpleName();
 
 
@@ -45,6 +47,7 @@ public abstract class BaseDialogFragment<P extends BasePresenter> extends Dialog
 
     /**
      * 重写此方法可以更换主题
+     *
      * @return
      */
     protected int initTheme() {
@@ -78,6 +81,12 @@ public abstract class BaseDialogFragment<P extends BasePresenter> extends Dialog
         onDialogCreated(params, dialog);
         window.setAttributes(params);
         return dialog;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mContext = getActivity();
     }
 
     @Override

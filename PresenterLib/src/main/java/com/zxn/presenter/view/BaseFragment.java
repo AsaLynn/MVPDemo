@@ -1,5 +1,6 @@
 package com.zxn.presenter.view;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.gyf.immersionbar.components.SimpleImmersionFragment;
 import com.zxn.presenter.presenter.BasePresenter;
@@ -29,12 +31,9 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment /*S
 
     protected P mPresenter;
     protected View mRootView;
-    protected boolean isVisible;
-    private boolean isPrepared;//标志位，标志已经初始化完成
-    private boolean isFirst = true;
-
     private Unbinder mUnbinder;
     protected String mPageTitle = "";
+    protected FragmentActivity mContext;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,17 +70,10 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment /*S
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        isPrepared = true;
+        mContext =  getActivity();
+//        isPrepared = true;
         if (usedEventBus())
             regEventBus();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (getUserVisibleHint()) {
-            setUserVisibleHint(true);
-        }
     }
 
     @Override
@@ -100,41 +92,7 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment /*S
         }
     }
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (getUserVisibleHint()) {
-            isVisible = true;
-            lazyLoad();
-        } else {
-            isVisible = false;
-            onInvisible();
-        }
-    }
-
-    /**
-     * 懒加载
-     */
-    protected void lazyLoad() {
-        if (!isPrepared || !isVisible || !isFirst) {
-            return;
-        }
-        initData();
-        isFirst = false;
-    }
-
-    /**
-     * fragment被设置为不可见时调用
-     */
-    protected abstract void onInvisible();
-
     protected abstract int getLayoutResId();
-
-    /**
-     * 这里获取数据，刷新界面，此方法执行在initView后面
-     */
-    protected abstract void initData();
-
     protected P createPresenter() {
         CreatePresenter annotation = getClass().getAnnotation(CreatePresenter.class);
         Class<P> pClass = null;
@@ -240,4 +198,50 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment /*S
             getActivity().finish();
         }
     }
+
+    //    @Override
+//    public void onResume() {
+//        super.onResume();
+//        if (getUserVisibleHint()) {
+//            setUserVisibleHint(true);
+//        }
+//    }
+//    @Override
+//    public void setUserVisibleHint(boolean isVisibleToUser) {
+//        super.setUserVisibleHint(isVisibleToUser);
+//        if (getUserVisibleHint()) {
+//            isVisible = true;
+//            lazyLoad();
+//        } else {
+//            isVisible = false;
+//            onInvisible();
+//        }
+//    }
+
+//    /**
+//     * 懒加载
+//     */
+//    protected void lazyLoad() {
+//        if (!isPrepared || !isVisible || !isFirst) {
+//            return;
+//        }
+//        initData();
+//        isFirst = false;
+//    }
+
+//    /**
+//     * fragment被设置为不可见时调用
+//     */
+//    protected abstract void onInvisible();
+
+
+//    /**
+//     * 这里获取数据，刷新界面，此方法执行在initView后面
+//     */
+//    protected abstract void initData();
+
+    //    protected boolean isVisible;
+//    private boolean isPrepared;//标志位，标志已经初始化完成
+//    private boolean isFirst = true;
+
 }
