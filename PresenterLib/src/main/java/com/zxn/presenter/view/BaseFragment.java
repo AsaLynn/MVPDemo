@@ -173,6 +173,14 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment /*S
     }
 
     @Override
+    public void closeLoading() {
+        if (getActivity() instanceof BaseActivity) {
+            BaseActivity activity = (BaseActivity) getActivity();
+            activity.closeLoading();
+        }
+    }
+
+    @Override
     public void showToast(int msg) {
         if (getActivity() instanceof BaseActivity) {
             BaseActivity activity = (BaseActivity) getActivity();
