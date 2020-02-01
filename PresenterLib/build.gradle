@@ -29,8 +29,8 @@ dependencies {
     api 'org.greenrobot:eventbus:3.1.1'
     api 'com.gyf.immersionbar:immersionbar:3.0.0-beta05'
     api 'com.gyf.immersionbar:immersionbar-components:3.0.0-beta05'
-    api 'com.jakewharton:butterknife:10.0.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
+    api 'com.jakewharton:butterknife:10.2.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
     api 'com.zxn.utils:common-utils:+'
 
 }
