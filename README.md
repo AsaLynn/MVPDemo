@@ -13,7 +13,7 @@ implementation 'com.zxn.presenter:PresenterLib:1.3.5'
 
 PresenterLib:1.3.8
 ```
-git tag -a v1.3.8 -m 'PresenterLib1.3.8:fix bug'
+git tag -a v1.3.8 -m 'PresenterLib1.3.8:fix'
 git push origin v1.3.8
 git tag
 ```
