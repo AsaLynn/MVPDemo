@@ -8,6 +8,8 @@ import java.util.List;
 public interface IPageDataPresenter<T> {
 
     List<T> getDataList();
+
+
 }
 
 

@@ -3,6 +3,7 @@ mvp架构基类
 
 #### 使用
 ```
+implementation 'com.zxn.presenter:PresenterLib:1.3.9'
 implementation 'com.zxn.presenter:PresenterLib:1.3.8'
 implementation 'com.zxn.presenter:PresenterLib:1.3.7'
 implementation 'com.zxn.presenter:PresenterLib:1.3.6'
@@ -11,6 +12,13 @@ implementation 'com.zxn.presenter:PresenterLib:1.3.5'
 
 #### 标签
 
+PresenterLib:1.3.9
+```
+git tag -a v1.3.9 -m 'PresenterLib1.3.9:fix'
+git push origin v1.3.9
+git tag
+```
+更新:增加部分下拉刷下逻辑处理.
 PresenterLib:1.3.8
 ```
 git tag -a v1.3.8 -m 'PresenterLib1.3.8:fix'

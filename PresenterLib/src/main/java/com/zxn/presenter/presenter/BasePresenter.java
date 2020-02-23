@@ -4,7 +4,6 @@ import android.util.Log;
 
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
-import java.util.List;
 
 /**
  * Presenter基类，弱引用管理View生命周期
@@ -90,7 +89,6 @@ public abstract class BasePresenter<V extends IView> {
         }
     }
 
-
     /**
      * 是否为列表下拉刷新,子类可重写
      *
@@ -107,6 +105,22 @@ public abstract class BasePresenter<V extends IView> {
      */
     public boolean hasMore() {
         return mCurrentPage < mPageCount;
+    }
+
+    public void resetCurrentPage() {
+        this.mCurrentPage = 1;
+    }
+
+    public void updateCurrentPage() {
+        this.mCurrentPage++;
+    }
+
+    public int currentPage() {
+        return mCurrentPage;
+    }
+
+    public void executePageRequest() {
+
     }
 
 }
