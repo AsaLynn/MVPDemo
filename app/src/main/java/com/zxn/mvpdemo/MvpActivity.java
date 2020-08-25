@@ -40,4 +40,9 @@ public abstract class MvpActivity extends BaseActivity {
     public void closeLoading() {
 
     }
+
+    @Override
+    public void showLoading() {
+
+    }
 }

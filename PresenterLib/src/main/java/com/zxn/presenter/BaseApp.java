@@ -1,5 +1,6 @@
 package com.zxn.presenter;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 import android.text.TextUtils;
@@ -11,9 +12,23 @@ import com.zxn.utils.UIUtils;
  * 应用需要继承此类.
  * Created by zxn on 2019/4/30.
  */
-public class BaseApp extends Application implements IView {
+public class BaseApp extends Application {
 
+    @SuppressLint("StaticFieldLeak")
     protected static Context mContext;
+
+    /**
+     * 开发模式
+     *
+     * @return false:线上模式,true:调试模式
+     */
+    public static boolean isDebug() {
+        return TextUtils.equals(BuildConfig.BUILD_TYPE, "debug");
+    }
+
+    public static <T extends BaseApp> T getApplication() {
+        return (T) mContext;
+    }
 
     @Override
     public void onCreate() {
@@ -55,57 +70,12 @@ public class BaseApp extends Application implements IView {
 //        return true;
     }
 
-    /**
-     * 开发模式
-     *
-     * @return false:线上模式,true:调试模式
-     */
-    public static boolean isDebug() {
-        return TextUtils.equals(BuildConfig.BUILD_TYPE, "debug");
-    }
-
-    public static <T extends BaseApp> T getApplication() {
-        return (T) mContext;
-    }
-
-
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
     public void showToast(int msg) {
         UIUtils.toast(UIUtils.getString(msg));
     }
 
-    @Override
     public void showToast(String msg) {
         UIUtils.toast(msg);
     }
 
-    @Override
-    public void showLoading(boolean cancelable) {
-
-    }
-
-    @Override
-    public void showLoading(String msg, boolean cancelable) {
-
-    }
-
-    @Override
-    public void showLoading(String msg) {
-
-    }
-
-    @Override
-    public void showLoading(int msgResId) {
-
-    }
-
-    @Override
-    public void closeLoading() {
-
-    }
 }

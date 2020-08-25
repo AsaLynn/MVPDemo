@@ -26,7 +26,6 @@ public abstract class BasePresenter<V extends IView> {
     }
 
     public void attachView(V view) {
-
         if (view == null) {
             throw new NullPointerException("view cannot be null");
         }

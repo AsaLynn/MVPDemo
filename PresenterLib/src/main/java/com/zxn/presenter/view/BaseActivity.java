@@ -1,7 +1,7 @@
 package com.zxn.presenter.view;
 
 import android.content.Context;
-import android.content.res.Configuration;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -9,7 +9,9 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.zxn.presenter.BaseApp;
+import com.zxn.presenter.R;
 import com.zxn.presenter.presenter.BasePresenter;
 import com.zxn.presenter.presenter.CreatePresenter;
 import com.zxn.presenter.presenter.IView;
@@ -25,42 +27,25 @@ import butterknife.Unbinder;
  */
 public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity implements IView {
 
-    private static final String TAG = "BaseActivity";
+    private static final String TAG = BaseActivity.class.getSimpleName();
     public P mPresenter;
     protected Context mContext;
     private Unbinder mUnbinder;
 
-    /***是否显示标题栏*/
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setRequestedOrientation(isPortraitOrientation() ? ActivityInfo.SCREEN_ORIENTATION_PORTRAIT : ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        if (getLayoutResId() != 0) {
-            setContentView(getLayoutResId());
-            mUnbinder = ButterKnife.bind(this);
-        }
+
         mContext = this;
 
-        initImmersionBar();
+        onInitBind();
 
-        if (createPresenter() != null) {
-            mPresenter = createPresenter();
-            mPresenter.attachView(this);
-        }
-        if (usedEventBus())
-            regEventBus();
+        onInitImmersionBar();
+
+        createPresenter();
+
+        regEventBus();
     }
-
-    /**
-     * 屏幕方向
-     *
-     * @return :true:竖屏,false:横向
-     */
-    public boolean isPortraitOrientation() {
-        return true;
-    }
-
 
     @Override
     protected void onDestroy() {
@@ -74,69 +59,28 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         unRegEventBus();
     }
 
-
-//    @Override
-//    public void showLoading() {
-//        setTheme(android.R.style.Theme);
-//    }
-
-    private P createPresenter() {
-        CreatePresenter annotation = getClass().getAnnotation(CreatePresenter.class);
-        Class<P> pClass = null;
-        if (annotation != null) {
-            pClass = (Class<P>) annotation.value();
-        }
-        try {
-            return mPresenter = pClass.newInstance();
-        } catch (Exception e) {
-            Log.i(TAG, "Presenter创建失败!，检查是否声明了@CreatePresenter(xx.class)注解");
-            return null;
-        }
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-    }
-
     /**
-     * 是否使用EventBus，如果需要使用子类重载此方法并返回true
+     * 启动页面
      *
-     * @return 是否启用
+     * @param intent      启动意图
+     * @param requestCode 请求码
      */
-    protected boolean usedEventBus() {
-        return false;
+    @Override
+    public void startActivityForResult(Intent intent, int requestCode) {
+        super.startActivityForResult(intent, requestCode);
+        // 返回桌面的时候不要动画,
+        if (intent.getCategories() == null || !intent.getCategories().toString().contains("HOME")) {
+            startAnimation(true);
+        }
     }
-
-    protected void regEventBus() {
-        if (!EventBus.getDefault().isRegistered(this))
-            EventBus.getDefault().register(this);
-    }
-
-    protected void unRegEventBus() {
-        if (EventBus.getDefault().isRegistered(this))
-            EventBus.getDefault().unregister(this);
-    }
-
-    protected abstract @LayoutRes
-    int getLayoutResId();
 
     /**
-     * 初始化沉浸式
-     * Init immersion bar.
+     * 关闭页面
      */
-    protected void initImmersionBar() {
-        //设置共同沉浸式样式
-        //navigationBarColor(R.color.colorPrimary)
-//        ImmersionBar.with(this).init();
-    }
-
     @Override
-    public void showLoading() {
-        if (getApplication() instanceof BaseApp) {
-            BaseApp baseApp = (BaseApp) getApplication();
-            baseApp.showLoading();
-        }
+    public void finish() {
+        super.finish();
+        startAnimation(false);
     }
 
     @Override
@@ -155,43 +99,116 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         }
     }
 
-    @Override
-    public void showLoading(boolean cancelable) {
-        if (getApplication() instanceof BaseApp) {
-            BaseApp baseApp = (BaseApp) getApplication();
-            baseApp.showLoading(cancelable);
+    /**
+     * 初始化绑定view.
+     */
+    protected void onInitBind() {
+        if (getLayoutResId() != 0) {
+            setContentView(getLayoutResId());
+            mUnbinder = ButterKnife.bind(this);
         }
     }
 
-    @Override
-    public void showLoading(String msg, boolean cancelable) {
-        if (getApplication() instanceof BaseApp) {
-            BaseApp baseApp = (BaseApp) getApplication();
-            baseApp.showLoading(msg,cancelable);
+    /**
+     * 通过注解创建Presenter
+     */
+    private void createPresenter() {
+        CreatePresenter annotation = getClass().getAnnotation(CreatePresenter.class);
+        Class<P> pClass = null;
+        if (annotation != null) {
+            pClass = (Class<P>) annotation.value();
+        }
+        try {
+            mPresenter = pClass.newInstance();
+        } catch (Exception e) {
+            Log.i(TAG, "Presenter创建失败!，检查是否声明了@CreatePresenter(xx.class)注解");
+        }
+        if (mPresenter == null) {
+            return;
+        }
+        mPresenter.attachView(this);
+    }
+
+    /**
+     * 是否使用EventBus，如果需要使用子类重载此方法并返回true
+     *
+     * @return 是否启用
+     */
+    protected boolean usedEventBus() {
+        return false;
+    }
+
+    /**
+     * 控制注册使用EventBus
+     */
+    protected void regEventBus() {
+        if (usedEventBus()) {
+            if (!EventBus.getDefault().isRegistered(this)) {
+                EventBus.getDefault().register(this);
+            }
         }
     }
 
-    @Override
-    public void showLoading(String msg) {
-        if (getApplication() instanceof BaseApp) {
-            BaseApp baseApp = (BaseApp) getApplication();
-            baseApp.showLoading(msg);
+    protected void unRegEventBus() {
+        if (EventBus.getDefault().isRegistered(this))
+            EventBus.getDefault().unregister(this);
+    }
+
+    protected abstract @LayoutRes
+    int getLayoutResId();
+
+    /**
+     * 初始化沉浸式
+     * Init immersion bar.
+     */
+    protected void onInitImmersionBar() {
+        if (usedStatusBarDarkFont()) {
+            setStatusBarDarkFont();
         }
     }
 
-    @Override
-    public void showLoading(int msgResId) {
-        if (getApplication() instanceof BaseApp) {
-            BaseApp baseApp = (BaseApp) getApplication();
-            baseApp.showLoading(msgResId);
+    /**
+     * 是否启用白色状态栏,黑色字体.
+     *
+     * @return false:关闭
+     */
+    protected boolean usedStatusBarDarkFont() {
+        return false;
+    }
+
+    /**
+     * 白色状态栏,黑色字体,黑色导航栏,解决了白色状态栏无法看见状态栏字体颜色问题
+     */
+    protected void setStatusBarDarkFont() {
+        ImmersionBar.with(this)
+                .statusBarDarkFont(true)
+                .navigationBarDarkIcon(true)
+                .init();
+    }
+
+    /**
+     * 指定开启动画或者关闭动画
+     *
+     * @param start true:执行开启动画,false:执行关闭动画.
+     */
+    protected void startAnimation(boolean start) {
+        if (usedAnimation()) {
+            if (start) {
+                //启动动画
+                overridePendingTransition(R.anim.slide_right_in, R.anim.slide_left_out);
+            } else {
+                //关闭动画
+                overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);
+            }
         }
     }
 
-    @Override
-    public void closeLoading() {
-        if (getApplication() instanceof BaseApp) {
-            BaseApp baseApp = (BaseApp) getApplication();
-            baseApp.closeLoading();
-        }
+    /**
+     * 是否启动动画,默认启用动画.
+     *
+     * @return true:启用,false,不启用.
+     */
+    protected boolean usedAnimation() {
+        return true;
     }
 }

@@ -1,1 +1,1 @@
-include ':app', ':PresenterLib'
+include ':app', ':PresenterLib', ':HttpRequestProcessor'
