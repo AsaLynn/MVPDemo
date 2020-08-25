@@ -1,7 +1,8 @@
 package com.zxn.mvpdemo;
 
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 
 /**
  * Created by zxn on 2019/4/2.
