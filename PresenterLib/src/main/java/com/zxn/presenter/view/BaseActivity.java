@@ -211,4 +211,35 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     protected boolean usedAnimation() {
         return true;
     }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void showLoading(boolean cancelable) {
+
+    }
+
+    @Override
+    public void showLoading(String msg, boolean cancelable) {
+
+    }
+
+    @Override
+    public void showLoading(String msg) {
+
+    }
+
+    @Override
+    public void showLoading(int msgResId) {
+
+    }
+
+    @Override
+    public void closeLoading() {
+
+    }
+
 }

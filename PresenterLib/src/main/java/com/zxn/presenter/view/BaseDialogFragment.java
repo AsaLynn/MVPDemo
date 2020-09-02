@@ -51,7 +51,8 @@ public abstract class BaseDialogFragment<P extends BasePresenter> extends Dialog
      * @return
      */
     protected int initTheme() {
-        return R.style.Dialog_FullScreen;
+        //return R.style.BaseDialog_FullScreen;
+        return R.style.BaseDialog_Nice;
     }
 
     @Nullable

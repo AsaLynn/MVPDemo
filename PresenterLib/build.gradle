@@ -7,8 +7,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 29
-        versionCode 140
-        versionName "1.4.1"
+        versionCode 141
+        versionName "1.4.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
@@ -40,7 +40,7 @@ def siteUrl = 'https://github.com/zhang721688/MVPDemo'
 def gitUrl = 'https://github.com/zhang721688/MVPDemo.git'
 def libName = "PresenterLib"
 group = "com.zxn.presenter"
-version = "1.4.1"
+version = "1.4.2"
 
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs

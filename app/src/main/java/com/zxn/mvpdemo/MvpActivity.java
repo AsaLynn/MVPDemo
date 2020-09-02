@@ -5,14 +5,15 @@ import com.zxn.presenter.view.BaseActivity;
 /**
  * Created by zxn on 2019/4/8.
  */
-public abstract class MvpActivity extends BaseActivity {
-    @Override
-    public void showToast(int msg) {
+public abstract  class MvpActivity extends BaseActivity {
 
+    @Override
+    protected int getLayoutResId() {
+        return 0;
     }
 
     @Override
-    public void showToast(String msg) {
+    public void showLoading() {
 
     }
 
@@ -38,11 +39,6 @@ public abstract class MvpActivity extends BaseActivity {
 
     @Override
     public void closeLoading() {
-
-    }
-
-    @Override
-    public void showLoading() {
 
     }
 }
